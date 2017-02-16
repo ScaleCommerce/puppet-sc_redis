@@ -3,10 +3,8 @@ class sc_redis (
   $supervisor_conf_script = '/etc/supervisor.d/redis.conf',
   $supervisor_exec_path   = '/usr/local/bin',
 ) {
-  Class['Apt::Update'] -> Class['Redis']
 
   include redis
-  include apt
 
   # supervisor
   file { '/etc/init.d/redis-server':
