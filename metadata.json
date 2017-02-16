@@ -1,0 +1,14 @@
+{
+  "name": "scalecommerce-sc_redis",
+  "version": "0.1.1",
+  "author": "Andreas Ziethen ScaleCommerce GmbH",
+  "summary": "ScaleCommerce Wrapper Module for arioch-redis. Manages Supervisord.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/ScaleCommerce/puppet-sc_redis.git",
+  "project_page": "https://github.com/ScaleCommerce/puppet-sc_redis",
+  "issues_url": "https://github.com/ScaleCommerce/puppet-sc_redis/issues",
+  "dependencies": [
+    { "name":"puppetlabs-stdlib","version_requirement":">= 1.0.0" }
+  ]
+}
+
