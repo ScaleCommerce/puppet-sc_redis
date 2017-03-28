@@ -24,6 +24,7 @@
 #
 
 class sc_redis (
+  $supervisor_exec_path   = '/usr/local/bin',
 ) {
 
   include sc_supervisor
@@ -41,6 +42,11 @@ class sc_redis (
     mode    => '0644',
     content => template("${module_name}/redis-server.supervisor.conf.erb"),
     notify  => Class[supervisord::reload],
+  }
+  
+  exec {'supervisorctl_redis_update':
+    command     => "${supervisor_exec_path}/supervisorctl update",
+    refreshonly => true,
   }
 
 }
