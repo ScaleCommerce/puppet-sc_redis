@@ -29,7 +29,7 @@ This module uses hiera to configure supervisord config for redis.
 
 You will need a working hiera-Setup (https://docs.puppetlabs.com/hiera/3.1/complete_example.html).
 
-Check out our solultion for Puppet-Hiera-Roles (https://github.com/ScaleCommerce/puppet-hiera-roles).
+Check out our solution for Puppet-Hiera-Roles (https://github.com/ScaleCommerce/puppet-hiera-roles).
 
 ## Usage:
 
