@@ -42,6 +42,16 @@ class sc_redis (
     group  => 'redis'
   }->
 
+  file { '/var/log/redis/error.log':
+    owner => 'redis',
+    group => 'redis',
+  }->
+
+  file { '/var/log/redis/redis.log':
+    owner => 'redis',
+    group => 'redis',
+  }->
+
   file { "${supervisord::config_include}/redis-server.conf":
     owner   => 'root',
     group   => 'root',
