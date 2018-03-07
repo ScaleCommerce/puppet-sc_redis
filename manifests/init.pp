@@ -36,6 +36,12 @@ class sc_redis (
     target => "${sc_supervisor::init_path}/supervisor-init-wrapper",
   }
 
+  file { '/run/redis':
+    ensure => directory,
+    owner  => 'redis',
+    group  => 'redis'
+  }->
+
   file { "${supervisord::config_include}/redis-server.conf":
     owner   => 'root',
     group   => 'root',
