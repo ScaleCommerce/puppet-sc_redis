@@ -29,6 +29,8 @@ class sc_redis (
 
   include sc_supervisor
   include redis
+  
+  Class['apt::update'] -> Package[redis-server]
 
   # supervisor
   file { '/etc/init.d/redis-server':
