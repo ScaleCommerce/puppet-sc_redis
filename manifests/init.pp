@@ -38,12 +38,6 @@ class sc_redis (
     target => "${sc_supervisor::init_path}/supervisor-init-wrapper",
   }
 
-  file { '/var/run/redis':
-    ensure => directory,
-    owner  => 'redis',
-    group  => 'redis'
-  }->
-
   file { '/var/log/redis/error.log':
     owner => 'redis',
     group => 'redis',
