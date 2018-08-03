@@ -1,6 +1,6 @@
 {
   "name": "scalecommerce-sc_redis",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Andreas Ziethen ScaleCommerce GmbH",
   "summary": "ScaleCommerce Wrapper Module for arioch-redis. Manages Supervisord.",
   "license": "Apache 2.0",
@@ -11,4 +11,3 @@
     { "name":"puppetlabs-stdlib","version_requirement":">= 1.0.0" }
   ]
 }
-

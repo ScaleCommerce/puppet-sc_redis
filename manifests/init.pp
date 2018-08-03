@@ -25,11 +25,15 @@
 
 class sc_redis (
   $supervisor_exec_path   = '/usr/local/bin',
+  $create_log_files = true,
 ) {
+  # Check some if they are boolean
+  validate_bool($create_log_files)
+
 
   include sc_supervisor
   include redis
-  
+
   Class['apt::update'] -> Package[redis-server]
 
   # supervisor
@@ -38,15 +42,17 @@ class sc_redis (
     target => "${sc_supervisor::init_path}/supervisor-init-wrapper",
   }
 
-  file { '/var/log/redis/error.log':
-    owner => 'redis',
-    group => 'redis',
-  }->
+  if ($create_log_files) {
+      file { '/var/log/redis/error.log':
+        owner => 'redis',
+        group => 'redis',
+      }->
 
-  file { '/var/log/redis/redis.log':
-    owner => 'redis',
-    group => 'redis',
-  }->
+      file { '/var/log/redis/redis.log':
+        owner => 'redis',
+        group => 'redis',
+      }
+  }
 
   file { "${supervisord::config_include}/redis-server.conf":
     owner   => 'root',
@@ -55,7 +61,7 @@ class sc_redis (
     content => template("${module_name}/redis-server.supervisor.conf.erb"),
     notify  => Class[supervisord::reload],
   }
-  
+
   exec {'supervisorctl_redis_update':
     command     => "${supervisor_exec_path}/supervisorctl update",
     refreshonly => true,
