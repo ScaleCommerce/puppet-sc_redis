@@ -1,7 +1,6 @@
 [program:redis-server]
 command=/usr/bin/redis-server /etc/redis/redis.conf
 stderr_logfile=/var/log/redis/error.log
-stdout_logfile=/var/log/redis/redis.log
 autostart=true
 autorestart=true
 stopwaitsecs=10
