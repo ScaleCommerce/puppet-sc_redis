@@ -46,11 +46,13 @@ class sc_redis (
       file { '/var/log/redis/error.log':
         owner => 'redis',
         group => 'redis',
+        require => File['/var/log/redis/redis.log'],
       }->
 
       file { '/var/log/redis/redis.log':
         owner => 'redis',
         group => 'redis',
+        require => Package[redis-server],
       }
   }
 
