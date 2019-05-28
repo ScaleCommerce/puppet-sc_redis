@@ -46,14 +46,14 @@ class sc_redis (
       file { '/var/log/redis/error.log':
         owner => 'redis',
         group => 'redis',
-        require => Package[redis-server],
+        require => Exec[supervisorctl_redis_update],
       }
 
-      file { '/var/log/redis/redis.log':
-        owner => 'redis',
-        group => 'redis',
-        require => Package[redis-server],
-      }
+#      file { '/var/log/redis/redis.log':
+#        owner => 'redis',
+#        group => 'redis',
+#        require => Exec[supervisorctl_redis_update],
+#      }
   }
 
   file { "${supervisord::config_include}/redis-server.conf":
