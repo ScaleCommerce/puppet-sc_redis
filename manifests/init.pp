@@ -25,48 +25,16 @@
 
 class sc_redis (
   $supervisor_exec_path   = '/usr/local/bin',
-  $create_log_files = true,
+  $use_supervisor = true,
 ) {
-  # Check some if they are boolean
-  validate_bool($create_log_files)
-
 
   include sc_supervisor
   include redis
 
+  if $use_supervisor {
+    class {'::sc_redis::supervisor':}
+  }
+
+
   Class['apt::update'] -> Package[redis-server]
-
-  # supervisor
-  file { '/etc/init.d/redis-server':
-    ensure => link,
-    target => "${sc_supervisor::init_path}/supervisor-init-wrapper",
-  }
-
-  if ($create_log_files) {
-      file { '/var/log/redis/error.log':
-        owner => 'redis',
-        group => 'redis',
-        require => Exec[supervisorctl_redis_update],
-      }
-
-#      file { '/var/log/redis/redis.log':
-#        owner => 'redis',
-#        group => 'redis',
-#        require => Exec[supervisorctl_redis_update],
-#      }
-  }
-
-  file { "${supervisord::config_include}/redis-server.conf":
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template("${module_name}/redis-server.supervisor.conf.erb"),
-    notify  => Class[supervisord::reload],
-  }
-
-  exec {'supervisorctl_redis_update':
-    command     => "${supervisor_exec_path}/supervisorctl update",
-    refreshonly => true,
-  }
-
 }
